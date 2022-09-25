@@ -5,11 +5,18 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private GameObject item;
+    [SerializeField] private Animator direction;
     private Tweener tweener;
+    
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
         tweener = gameObject.GetComponent<Tweener>();
+        
+
 
     }
 
@@ -17,25 +24,35 @@ public class InputManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
+
+        if (item.transform.position.x == 5.48f && item.transform.position.y == -1.53f)
         {
-            tweener.AddTween(item.transform, item.transform.position, new Vector3(5.48f, -1.53f, 0.0f), 1.5f);
+            tweener.AddTween(item.transform, item.transform.position, new Vector3(10.51f, -1.53f, 0.0f), 3.0f);
+            direction.SetTrigger("D");
+
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (item.transform.position.x == 10.51f && item.transform.position.y == -1.53f)
         {
-            tweener.AddTween(item.transform, item.transform.position, new Vector3(10.51f, -5.4f, 0.0f), 1.5f);
+            tweener.AddTween(item.transform, item.transform.position, new Vector3(10.51f, -5.4f, 0.0f), 3.0f);
+            direction.SetTrigger("S");
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+
+        if (item.transform.position.x == 10.51f && item.transform.position.y == -5.4f)
         {
-            tweener.AddTween(item.transform, item.transform.position, new Vector3(5.48f, -5.4f, 0.0f), 1.5f);
+            tweener.AddTween(item.transform, item.transform.position, new Vector3(5.48f, -5.4f, 0.0f), 3.0f);
+            direction.SetTrigger("A");
+
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+
+        else if (item.transform.position.x == 5.48f && item.transform.position.y == -5.4f)
         {
-            tweener.AddTween(item.transform, item.transform.position, new Vector3(10.51f, -1.53f, 0.0f), 1.5f);
+            tweener.AddTween(item.transform, item.transform.position, new Vector3(5.48f, -1.53f, 0.0f), 3.0f);
+            direction.SetTrigger("W");
         }
+       
 
 
     }
