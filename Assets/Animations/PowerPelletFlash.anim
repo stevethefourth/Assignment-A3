@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ghost1Scared
+  m_Name: PowerPelletFlash
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,14 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 1482298359, guid: c48067ebf42889c4ab3b083f23c36bbc, type: 3}
-    - time: 0.25
-      value: {fileID: -2102787393, guid: c48067ebf42889c4ab3b083f23c36bbc, type: 3}
+      value: {fileID: -1477604352, guid: 0e20c5bc7f3eb5b498dce944104593f1, type: 3}
+    - time: 0.6
+      value: {fileID: 1318736428, guid: 0e20c5bc7f3eb5b498dce944104593f1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 4
+  m_SampleRate: 5
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -43,14 +43,14 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
     pptrCurveMapping:
-    - {fileID: 1482298359, guid: c48067ebf42889c4ab3b083f23c36bbc, type: 3}
-    - {fileID: -2102787393, guid: c48067ebf42889c4ab3b083f23c36bbc, type: 3}
+    - {fileID: -1477604352, guid: 0e20c5bc7f3eb5b498dce944104593f1, type: 3}
+    - {fileID: 1318736428, guid: 0e20c5bc7f3eb5b498dce944104593f1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.8
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
