@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Outer Wall
+  m_Name: Walls Sprite Sheet_4
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: a671ff065db64214da94ea2bc9093226, type: 3}
+  m_Sprite: {fileID: 1614591477, guid: 61f62a886748ba848be6973df0cd6944, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
