@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 450113535}
   - component: {fileID: 450113534}
   m_Layer: 0
-  m_Name: Ghost 1_0
+  m_Name: Ghost 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 672409621}
   - component: {fileID: 672409620}
   m_Layer: 0
-  m_Name: Ghost 4_0
+  m_Name: Ghost 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2954,7 +2954,7 @@ GameObject:
   - component: {fileID: 918854964}
   - component: {fileID: 918854963}
   m_Layer: 0
-  m_Name: Ghost 3_0
+  m_Name: Ghost 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5036,8 +5036,8 @@ GameObject:
   - component: {fileID: 1295366457}
   - component: {fileID: 1295366456}
   m_Layer: 5
-  m_Name: Button (Legacy)
-  m_TagString: Untagged
+  m_Name: QuitButton
+  m_TagString: QuitButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7342,7 +7342,7 @@ GameObject:
   - component: {fileID: 1827088388}
   - component: {fileID: 1827088387}
   m_Layer: 0
-  m_Name: Ghost 2_0
+  m_Name: Ghost 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

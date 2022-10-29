@@ -36,8 +36,17 @@ public class UiManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public void QuitScene()
+    {
+        SceneManager.LoadSceneAsync(0);
+        Destroy(gameObject);
+    }
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        if(scene.buildIndex == 1 || scene.buildIndex == 2)
+        {
+            Button quitButton = GameObject.FindGameObjectWithTag("QuitButton").GetComponent<Button>();
+            quitButton.onClick.AddListener(QuitScene);
+        }
     }
 }
