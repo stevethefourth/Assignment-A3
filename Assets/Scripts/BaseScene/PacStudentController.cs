@@ -15,13 +15,16 @@ public class PacStudentController : MonoBehaviour
     public Sprite background;
     public Sprite pellets;
     public Sprite powerPellets;
+    
     private static Vector3Int Left = new Vector3Int(-1, 0, 0), Right = new Vector3Int(1, 0, 0), Up = new Vector3Int(0, 1, 0), Down = new Vector3Int(0, -1, 0);
     // Start is called before the first frame update
     void Start()
     {
+        
         m_animator = GetComponent<Animator>();
         tweener = GetComponent<Tweener>();
-
+        
+        m_animator.SetTrigger("B");
     }
 
     // Update is called once per frame
@@ -30,76 +33,79 @@ public class PacStudentController : MonoBehaviour
         currentTilemap = CheckTileMap();
         if (Input.GetKeyDown(KeyCode.A))
         {
-           
+
             lastinput = "left";
 
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-           
+
             lastinput = "up";
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            
+
             lastinput = "right";
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-           
+
             lastinput = "down";
         }
-        if (canWalk(lastinput) == true)
+        if (Time.time > 3.0f)
         {
-            
-            currentinput = lastinput;
-            switch (currentinput)
+            if (canWalk(lastinput) == true)
             {
-                case "left":
-                    m_animator.ResetTrigger("B");
-                    m_animator.SetTrigger("A");
-                    break;
-                case "right":
-                    m_animator.ResetTrigger("B");
-                    m_animator.SetTrigger("D");
-                    break;
-                case "up":
-                    m_animator.ResetTrigger("B");
-                    m_animator.SetTrigger("W");
-                    break;
-                case "down":
-                    m_animator.ResetTrigger("B");
-                    m_animator.SetTrigger("S");
-                    break;
-                default:
-                    break;
 
-            }
-            if (!tweener.TweenExists(transform))
-            {
-                tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
+                currentinput = lastinput;
+                switch (currentinput)
+                {
+                    case "left":
+                        m_animator.ResetTrigger("B");
+                        m_animator.SetTrigger("A");
+                        break;
+                    case "right":
+                        m_animator.ResetTrigger("B");
+                        m_animator.SetTrigger("D");
+                        break;
+                    case "up":
+                        m_animator.ResetTrigger("B");
+                        m_animator.SetTrigger("W");
+                        break;
+                    case "down":
+                        m_animator.ResetTrigger("B");
+                        m_animator.SetTrigger("S");
+                        break;
+                    default:
+                        break;
 
-            }
-        }
-        if(canWalk(lastinput) == false)
-        {
-            if(canWalk(currentinput) == true)
-            {
+                }
                 if (!tweener.TweenExists(transform))
                 {
                     tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
 
                 }
-            }
-            else
-            {
-                m_animator.SetTrigger("B");
-            }
-          
-        }
 
-       
+                if (canWalk(lastinput) == false)
+                {
+                    if (canWalk(currentinput) == true)
+                    {
+                        if (!tweener.TweenExists(transform))
+                        {
+                            tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
+
+                        }
+                    }
+                    else
+                    {
+                        m_animator.SetTrigger("B");
+                    }
+
+                }
+            }
+        }
     }
+    
     public bool canWalk(string direction)
     {
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
@@ -168,7 +174,7 @@ public class PacStudentController : MonoBehaviour
             Vector3Int gridposition = tiles[i].WorldToCell(transform.position);
             if (tiles[0].HasTile(gridposition))
             {
-                Debug.Log(i);
+                
                 return tiles[i];
 
             }
