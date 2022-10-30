@@ -33,6 +33,7 @@ public class CherryController : MonoBehaviour
             buffer = +current;
             Instantiate(cherry, new Vector3(Random.Range(5.0f, 30.0f), yValue,0.0f), Quaternion.identity);
         }
+        
     }
     
 }
