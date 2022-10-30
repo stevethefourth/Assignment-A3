@@ -29,49 +29,77 @@ public class PacStudentController : MonoBehaviour
         currentTilemap = CheckTileMap();
         if (Input.GetKeyDown(KeyCode.A))
         {
-            m_animator.SetTrigger("A");
+           
             lastinput = "left";
 
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            m_animator.SetTrigger("W");
+           
             lastinput = "up";
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            m_animator.SetTrigger("D");
+            
             lastinput = "right";
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            m_animator.SetTrigger("S");
+           
             lastinput = "down";
         }
-        if (canWalk() == true)
+        if (canWalk(lastinput) == true)
         {
+            
+            currentinput = lastinput;
+            switch (currentinput)
+            {
+                case "left":
+                    m_animator.SetTrigger("A");
+                    break;
+                case "right":
+                    m_animator.SetTrigger("D");
+                    break;
+                case "up":
+                    m_animator.SetTrigger("W");
+                    break;
+                case "down":
+                    m_animator.SetTrigger("S");
+                    break;
+                default:
+                    break;
+
+            }
             if (!tweener.TweenExists(transform))
             {
                 tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
 
             }
         }
-        
+        if(canWalk(lastinput) == false)
+        {
+            if(canWalk(currentinput) == true)
+            {
+                if (!tweener.TweenExists(transform))
+                {
+                    tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
+
+                }
+            }
+          
+        }
+
+       
     }
-    public bool canWalk()
+    public bool canWalk(string direction)
     {
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
-        switch (lastinput)
+        switch (direction)
         {
             case "left": gridposition = currentTilemap.WorldToCell(transform.position + Left);
                 if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
-                {
-                    Debug.Log("True");
                     return true;
-                }
                 return false;
-                    
-                
             case "right": gridposition = currentTilemap.WorldToCell(transform.position + Right);
                 if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
                     return true;
@@ -94,7 +122,7 @@ public class PacStudentController : MonoBehaviour
     {
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
         Vector3 center;
-        switch (lastinput)
+        switch (currentinput)
         {
             case "left": gridposition = currentTilemap.WorldToCell(transform.position + Left);
                 center = currentTilemap.GetCellCenterWorld(gridposition); 
