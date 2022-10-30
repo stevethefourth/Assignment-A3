@@ -7,9 +7,10 @@ public class CherryController : MonoBehaviour
 {
 
     public GameObject cherry;
-    private float buffer = 10.0f;
+    private float buffer = 1.0f;
     private float current;
     private float timeToLerp = 8.0f;
+    private GameObject clone;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,33 +29,26 @@ public class CherryController : MonoBehaviour
             Instantiate(cherry, new Vector3(Random.Range(5.0f, 30.0f), randomValue(),0.0f), Quaternion.identity);
             current = current - buffer; 
         }
-        if(GameObject.FindGameObjectsWithTag("Cherry") != null)
+        clone = GameObject.FindGameObjectWithTag("Cherry");
+        if (GameObject.FindGameObjectWithTag("Cherry") != null)
         {
+            Debug.Log("working");
             move();
-            offScreen();
+            if (clone.transform.position.y == -33.0f || clone.transform.position.y == 2.0f)
+                Destroy(cherry);
         }
         
     }
-    public void offScreen()
-    {
-        if(cherry.transform.position.y == 2.0f)
-        {
-            Destroy(gameObject);
-        }
-        if (cherry.transform.position.y == -33.0f)
-        {
-            Destroy(gameObject);
-        }
-    }
+    
     public void move()
     {
-        if (cherry.transform.position.y == -32 )
+        if (clone.transform.position.y == -32 )
         {
-            cherry.transform.position = Vector3.Lerp(cherry.transform.position, new Vector3(cherry.transform.position.x,2.0f,0.0f), timeToLerp);
+            clone.transform.position = Vector3.Lerp(clone.transform.position, new Vector3(clone.transform.position.x,2.0f,0.0f), timeToLerp);
         }
-        else if (cherry.transform.position.y == 1)
+        else if (clone.transform.position.y == 1)
         {
-            cherry.transform.position = Vector3.Lerp(cherry.transform.position, new Vector3(cherry.transform.position.x, -33.0f, 0.0f), timeToLerp);
+            clone.transform.position = Vector3.Lerp(clone.transform.position, new Vector3(clone.transform.position.x, -33.0f, 0.0f), timeToLerp);
         }
     }
     public float randomValue()
