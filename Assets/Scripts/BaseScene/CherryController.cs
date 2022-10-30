@@ -37,7 +37,7 @@ public class CherryController : MonoBehaviour
         {
             Debug.Log("working");
             move();
-            if(clone.transform.position.y > 7.50f|| clone.transform.position.y < -38.50f)
+            if(clone.transform.position.y > 2.5f|| clone.transform.position.y < -33.5f)
             {
                 Destroy(clone);
             }
@@ -50,13 +50,13 @@ public class CherryController : MonoBehaviour
     {
         if (clone.transform.position.y == -32 )
         {
-            tweener.AddTween(clone.transform, clone.transform.position, new Vector3(clone.transform.position.x, 8.0f, 0.0f), timeToTween);
+            tweener.AddTween(clone.transform, clone.transform.position, new Vector3(clone.transform.position.x, 3.0f, 0.0f), timeToTween);
            
         }
         else if (clone.transform.position.y == 1)
         {
 
-            tweener.AddTween(clone.transform, clone.transform.position, new Vector3(clone.transform.position.x, -39.0f, 0.0f), timeToTween);
+            tweener.AddTween(clone.transform, clone.transform.position, new Vector3(clone.transform.position.x, -34.0f, 0.0f), timeToTween);
         }
     }
     public float randomValue()
