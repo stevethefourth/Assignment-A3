@@ -12,7 +12,8 @@ public class PacStudentController : MonoBehaviour
     Tweener tweener;
     private string lastinput = "";
     private string currentinput = "";
-
+    public Sprite background;
+    public Sprite pellets;
     private static Vector3Int Left = new Vector3Int(-1, 0, 0), Right = new Vector3Int(1, 0, 0), Up = new Vector3Int(0, 1, 0), Down = new Vector3Int(0, -1, 0);
     // Start is called before the first frame update
     void Start()
@@ -47,14 +48,36 @@ public class PacStudentController : MonoBehaviour
             m_animator.SetTrigger("S");
             lastinput = "down";
         }
-        
-        if (!tweener.TweenExists(transform))
+        if (canWalk() == true)
         {
-           tweener.AddTween(transform,transform.position ,nextTile() ,10.0f );
-            
-       }
-    }
+            if (!tweener.TweenExists(transform))
+            {
+                tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
 
+            }
+        }
+        
+    }
+    public bool canWalk()
+    {
+        Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
+        switch (lastinput)
+        {
+            case "left":  gridposition = currentTilemap.WorldToCell(transform.position + Left);
+                
+                if (walkable.currentTilemap.GetSprite(gridposition) == ) { }
+            case "right":
+               
+            case "up":
+               
+            case "down":
+                
+            default:
+                break;
+
+        }
+        return false;
+    }
     public Vector3 nextTile()
     {
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
