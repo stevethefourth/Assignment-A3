@@ -15,12 +15,12 @@ public class PacStudentController : MonoBehaviour
     public Sprite background;
     public Sprite pellets;
     public Sprite powerPellets;
-    
+    public ParticleSystem particles;
     private static Vector3Int Left = new Vector3Int(-1, 0, 0), Right = new Vector3Int(1, 0, 0), Up = new Vector3Int(0, 1, 0), Down = new Vector3Int(0, -1, 0);
     // Start is called before the first frame update
     void Start()
     {
-        
+        particles.Pause();
         m_animator = GetComponent<Animator>();
         tweener = GetComponent<Tweener>();
         currentTilemap = CheckTileMap();
@@ -55,15 +55,17 @@ public class PacStudentController : MonoBehaviour
 
         if (canWalk(lastinput) == true  )
         {
-
+            particles.Play();
             currentinput = lastinput;
             switch (currentinput)
             {
                 case "left":
+                    
                     m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("A");
                     break;
                 case "right":
+                    
                     m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("D");
                     break;
@@ -98,6 +100,7 @@ public class PacStudentController : MonoBehaviour
             else
             {
                 m_animator.SetTrigger("B");
+                particles.Stop();
             }
 
         }
@@ -109,7 +112,7 @@ public class PacStudentController : MonoBehaviour
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
         if (currentTilemap.GetSprite(gridposition) == pellets)
         {
-            Debug.Log("True");
+            
             return true;
         }
         return false;
