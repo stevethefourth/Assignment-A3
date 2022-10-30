@@ -52,60 +52,69 @@ public class PacStudentController : MonoBehaviour
 
             lastinput = "down";
         }
-        if (Time.time > 3.0f)
+
+        if (canWalk(lastinput) == true  )
         {
-            if (canWalk(lastinput) == true)
+
+            currentinput = lastinput;
+            switch (currentinput)
             {
+                case "left":
+                    m_animator.ResetTrigger("B");
+                    m_animator.SetTrigger("A");
+                    break;
+                case "right":
+                    m_animator.ResetTrigger("B");
+                    m_animator.SetTrigger("D");
+                    break;
+                case "up":
+                    m_animator.ResetTrigger("B");
+                    m_animator.SetTrigger("W");
+                    break;
+                case "down":
+                    m_animator.ResetTrigger("B");
+                    m_animator.SetTrigger("S");
+                    break;
+                default:
+                    break;
 
-                currentinput = lastinput;
-                switch (currentinput)
-                {
-                    case "left":
-                        m_animator.ResetTrigger("B");
-                        m_animator.SetTrigger("A");
-                        break;
-                    case "right":
-                        m_animator.ResetTrigger("B");
-                        m_animator.SetTrigger("D");
-                        break;
-                    case "up":
-                        m_animator.ResetTrigger("B");
-                        m_animator.SetTrigger("W");
-                        break;
-                    case "down":
-                        m_animator.ResetTrigger("B");
-                        m_animator.SetTrigger("S");
-                        break;
-                    default:
-                        break;
+            }
+            if (!tweener.TweenExists(transform))
+            {
+                tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
 
-                }
+            }
+        }
+        if (canWalk(lastinput) == false)
+        {
+            if (canWalk(currentinput) == true)
+            {
                 if (!tweener.TweenExists(transform))
                 {
                     tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
 
                 }
-
-                if (canWalk(lastinput) == false)
-                {
-                    if (canWalk(currentinput) == true)
-                    {
-                        if (!tweener.TweenExists(transform))
-                        {
-                            tweener.AddTween(transform, transform.position, nextTile(), 0.5f);
-
-                        }
-                    }
-                    else
-                    {
-                        m_animator.SetTrigger("B");
-                    }
-
-                }
             }
+            else
+            {
+                m_animator.SetTrigger("B");
+            }
+
         }
+            
+        
     }
-    
+    public bool eating()
+    {
+        Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
+        if (currentTilemap.GetSprite(gridposition) == pellets)
+        {
+            Debug.Log("True");
+            return true;
+        }
+                
+        return false;
+    }
     public bool canWalk(string direction)
     {
         Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
