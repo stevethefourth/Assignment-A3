@@ -4,50 +4,57 @@ using UnityEngine;
 
 public class Tweener : MonoBehaviour
 {
-    private Tween activeTween;
-    private float currentTime;
-    // Start is called before the first frame update
-    void Start()
-    {
+    //private Tween activeTween;
+    private List<Tween> activeTweens;
 
+    void Awake()
+    {
+        activeTweens = new List<Tween>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (activeTween != null)
+        //if (activeTween != null)
+        Tween activeTween;
+        for (int i = activeTweens.Count - 1; i >= 0; i--) //Tween activeTween in activeTweens.Reverse<Tween>())
         {
+            activeTween = activeTweens[i];
 
             if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
             {
-                currentTime = ((Time.time - activeTween.StartTime) / activeTween.Duration);
-
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, easeIn(currentTime));
+                float timeFraction = (Time.time - activeTween.StartTime) / activeTween.Duration;
+                //timeFraction = Mathf.Pow(timeFraction, 3);
+                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos,
+                                                          activeTween.EndPos,
+                                                           timeFraction);
             }
-
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) < 0.1f)
+            else
             {
                 activeTween.Target.position = activeTween.EndPos;
-
-                activeTween = null;
-
+                //activeTween = null;
+                activeTweens.RemoveAt(i);
             }
         }
-
-
-
     }
 
-    public void AddTween(Transform targetObject, Vector3 startPos, Vector3 endPos, float duration)
+    public bool AddTween(Transform targetObject, Vector3 startPos, Vector3 endPos, float duration)
     {
-        if (activeTween == null)
+        if (!TweenExists(targetObject))
         {
-            activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
+            activeTweens.Add(new Tween(targetObject, startPos, endPos, Time.time, duration));
+            return true;
         }
-
+        return false;
     }
-    public float easeIn(float t)
+
+
+    public bool TweenExists(Transform target)
     {
-        return t * t * t;
+        foreach (Tween activeTween in activeTweens)
+        {
+            if (activeTween.Target.transform == target)
+                return true;
+        }
+        return false;
     }
 }

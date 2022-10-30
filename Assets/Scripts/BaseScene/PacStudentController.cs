@@ -48,12 +48,47 @@ public class PacStudentController : MonoBehaviour
             lastinput = "down";
         }
         
-        //if (!tweener.TweenExists())
-        //{
-           //tweener.AddTween(, , , );
+        if (!tweener.TweenExists(transform))
+        {
+           tweener.AddTween(transform,transform.position ,nextTile() ,10.0f );
             
-       // }
+       }
     }
+
+    public Vector3 nextTile()
+    {
+        Vector3Int gridposition = currentTilemap.WorldToCell(transform.position);
+        Vector3 center;
+        switch (lastinput)
+        {
+            case "left": gridposition = currentTilemap.WorldToCell(transform.position + Left);
+                center = currentTilemap.GetCellCenterWorld(gridposition); 
+                return center;
+            case "right":
+                gridposition = currentTilemap.WorldToCell(transform.position + Right);
+                center = currentTilemap.GetCellCenterWorld(gridposition);
+                return center;
+            case "up":
+                 gridposition = currentTilemap.WorldToCell(transform.position + Up);
+                center = currentTilemap.GetCellCenterWorld(gridposition);
+                return center;
+            case "down":
+                 gridposition = currentTilemap.WorldToCell(transform.position + Down);
+                center = currentTilemap.GetCellCenterWorld(gridposition);
+                return center;
+            default:
+                break;
+                
+        }
+
+        center = currentTilemap.GetCellCenterWorld(gridposition);
+        return center;
+
+
+
+    }
+
+
     private Tilemap CheckTileMap()
     {
         for(int i = 0; i < tiles.Length;i++ )
