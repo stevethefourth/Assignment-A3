@@ -11,46 +11,54 @@ public class RunningSound : MonoBehaviour
     private bool currentlyEating = false;
     private bool playing = false;
     private bool switchedOn = false;
+    private float startedTime;
+    private float now;
     // Start is called before the first frame update
     void Start()
     {
-        
 
         
-        source.PlayDelayed(8f);
+        
+        
     }
 
      //Update is called once per frame
     void Update()
     {
-        if (controller.eating())
-            currentlyEating = true;
-        else
-            currentlyEating = false;
-
-
-        if(currentlyEating && playing == true)
+        now += Time.deltaTime;
+        if (now > 8f)
         {
-            source.Stop();
-            source.clip = eating;
-            source.loop = true;
-            source.volume = 0.5f;
-            source.Play();
-            playing = true;
-            switchedOn = false;
-        }
-        else if(switchedOn == false&& currentlyEating == false)
-        {
-            source.Stop();
-            source.clip = running;
-            source.loop = true;
-            source.volume = 0.2f;
-            source.Play();
-            switchedOn = true;
-            playing = false;
-        }
+            if (controller.eating())
+                currentlyEating = true;
+            else
+                currentlyEating = false;
 
 
+            if (currentlyEating && playing == false)
+            {
+                source.Stop();
+                source.clip = eating;
+                source.loop = true;
+                source.volume = 0.5f;
+                source.Play();
+                playing = true;
+                switchedOn = false;
+            }
+            else if (switchedOn == false && currentlyEating == false)
+            {
+                source.Stop();
+                source.clip = running;
+                source.loop = true;
+                source.volume = 0.2f;
+                source.Play();
+                switchedOn = true;
+                playing = false;
+
+            }
+
+        }
        
     }
+    
 }
+
