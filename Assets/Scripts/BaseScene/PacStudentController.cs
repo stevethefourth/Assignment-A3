@@ -23,7 +23,7 @@ public class PacStudentController : MonoBehaviour
         
         m_animator = GetComponent<Animator>();
         tweener = GetComponent<Tweener>();
-        
+        currentTilemap = CheckTileMap();
         m_animator.SetTrigger("B");
     }
 
@@ -112,7 +112,6 @@ public class PacStudentController : MonoBehaviour
             Debug.Log("True");
             return true;
         }
-                
         return false;
     }
     public bool canWalk(string direction)
@@ -188,7 +187,7 @@ public class PacStudentController : MonoBehaviour
 
             }
         }
-        Debug.Log("Empty");
+        
         return null;
     }
 

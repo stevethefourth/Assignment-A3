@@ -766,6 +766,7 @@ MonoBehaviour:
   source: {fileID: 360803589}
   running: {fileID: 8300000, guid: 9ae0b5cf4bae04d43b2e98d88c4fbafa, type: 3}
   eating: {fileID: 8300000, guid: e23863b8901d1e1428b9e63806339b67, type: 3}
+  controller: {fileID: 360803592}
 --- !u!114 &360803592
 MonoBehaviour:
   m_ObjectHideFlags: 0
