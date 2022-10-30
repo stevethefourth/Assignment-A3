@@ -14,6 +14,7 @@ public class PacStudentController : MonoBehaviour
     private string currentinput = "";
     public Sprite background;
     public Sprite pellets;
+    public Sprite powerPellets;
     private static Vector3Int Left = new Vector3Int(-1, 0, 0), Right = new Vector3Int(1, 0, 0), Up = new Vector3Int(0, 1, 0), Down = new Vector3Int(0, -1, 0);
     // Start is called before the first frame update
     void Start()
@@ -55,15 +56,19 @@ public class PacStudentController : MonoBehaviour
             switch (currentinput)
             {
                 case "left":
+                    m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("A");
                     break;
                 case "right":
+                    m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("D");
                     break;
                 case "up":
+                    m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("W");
                     break;
                 case "down":
+                    m_animator.ResetTrigger("B");
                     m_animator.SetTrigger("S");
                     break;
                 default:
@@ -86,6 +91,10 @@ public class PacStudentController : MonoBehaviour
 
                 }
             }
+            else
+            {
+                m_animator.SetTrigger("B");
+            }
           
         }
 
@@ -97,19 +106,19 @@ public class PacStudentController : MonoBehaviour
         switch (direction)
         {
             case "left": gridposition = currentTilemap.WorldToCell(transform.position + Left);
-                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
+                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets || currentTilemap.GetSprite(gridposition) == powerPellets)
                     return true;
                 return false;
             case "right": gridposition = currentTilemap.WorldToCell(transform.position + Right);
-                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
+                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets || currentTilemap.GetSprite(gridposition) == powerPellets)
                     return true;
                 return false;
             case "up":  gridposition = currentTilemap.WorldToCell(transform.position + Up);
-                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
+                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets || currentTilemap.GetSprite(gridposition) == powerPellets)
                     return true;
                 return false;
             case "down": gridposition = currentTilemap.WorldToCell(transform.position + Down);
-                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets)
+                if (currentTilemap.GetSprite(gridposition) == background || currentTilemap.GetSprite(gridposition) == pellets || currentTilemap.GetSprite(gridposition) == powerPellets)
                     return true;
                 return false;
             default:
